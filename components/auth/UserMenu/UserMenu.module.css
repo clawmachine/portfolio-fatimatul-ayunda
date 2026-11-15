@@ -1,0 +1,60 @@
+/* acuan: reference/login-demo.html (.user, .chipbtn, .menu) */
+.user {
+  position: relative;
+}
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 14px 6px 6px;
+  border-radius: 999px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  font-size: 14px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+.menu {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 10px);
+  width: 240px;
+  padding: 8px;
+  border-radius: 20px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-side);
+  z-index: 30;
+}
+.who {
+  padding: 12px 12px 14px;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 6px;
+}
+.who b {
+  display: block;
+  font-weight: 500;
+}
+.who small {
+  color: var(--muted);
+  font-size: 12.5px;
+  word-break: break-all;
+}
+.menu button {
+  width: 100%;
+  text-align: left;
+  padding: 11px 12px;
+  border-radius: 12px;
+  font-size: 14px;
+}
+.menu button:hover {
+  background: var(--soft);
+}
+
+@media (max-width: 480px) {
+  .chip {
+    padding: 4px 12px 4px 4px;
+    font-size: 13px;
+    gap: 8px;
+  }
+}

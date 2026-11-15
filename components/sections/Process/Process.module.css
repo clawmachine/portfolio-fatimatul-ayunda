@@ -1,0 +1,71 @@
+/* mockup: .sub-h + h3, .proc */
+.section {
+  position: relative;
+  /* atas 110px: jarak dari orbit Tools; bawah 140px seperti .sec */
+  padding: 110px var(--page-x) 140px;
+}
+
+.steps {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  margin-top: 56px;
+  list-style: none;
+}
+.line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 1px;
+  background: var(--line);
+  transform-origin: 0 50%;
+}
+.step {
+  padding: 27px 22px 0 0; /* 26px + 1px tebal garis */
+}
+.step b {
+  display: block;
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 40px;
+  line-height: 1;
+}
+.step h4 {
+  margin: 14px 0 6px;
+  font-size: 18px;
+  font-weight: 500;
+}
+.step p {
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+/* HP: langkah bersusun, nomor di kiri, garis pemisah per langkah */
+@media (max-width: 899px) {
+  .section {
+    padding: 88px var(--page-x) 96px;
+  }
+  .steps {
+    grid-template-columns: minmax(0, 1fr);
+    margin-top: 40px;
+  }
+  .line {
+    display: none;
+  }
+  .step {
+    display: grid;
+    grid-template-columns: 64px minmax(0, 1fr);
+    column-gap: 8px;
+    padding: 20px 0;
+    border-top: 1px solid var(--line);
+  }
+  .step b {
+    grid-row: span 2;
+    font-size: 34px;
+  }
+  .step h4 {
+    margin: 2px 0 4px;
+  }
+}

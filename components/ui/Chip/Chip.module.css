@@ -1,0 +1,16 @@
+/* mockup: .chip */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--ink-3);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  padding: 8px 16px;
+  border-radius: 999px;
+}
+.chip::before {
+  content: '✦';
+  font-size: 11px;
+}

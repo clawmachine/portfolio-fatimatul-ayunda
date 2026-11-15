@@ -1,0 +1,31 @@
+/* acuan: reference/login-demo.html (.toast) */
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 24px;
+  z-index: 70;
+  /* geser penuh ke bawah layar (tinggi toast + jarak bawah + bayangan) lalu sembunyikan */
+  transform: translate(-50%, calc(100% + 80px));
+  visibility: hidden;
+  padding: 12px 18px;
+  border-radius: 999px;
+  font-size: 14px;
+  color: var(--ink);
+  white-space: nowrap;
+  background: var(--glass);
+  border: 1px solid var(--glass-line);
+  box-shadow: var(--glass-shadow);
+  backdrop-filter: blur(14px);
+  transition: transform 0.35s ease, visibility 0s linear 0.35s;
+  pointer-events: none;
+}
+.toast.show {
+  transform: translate(-50%, 0);
+  visibility: visible;
+  transition: transform 0.35s ease;
+}
+@media (prefers-reduced-motion: reduce) {
+  .toast {
+    transition: none;
+  }
+}

@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Selected Work · Scroll Demo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f6f5f1; --surface:#ffffff; --ink:#141414; --muted:#86847f; --line:#dedcd6;
+  --soft:#eeede9; --soft2:#e3e1dc; --vis-a:#eeece7; --vis-b:#d9d6cf; --dark:#18181a;
+  --shadow:0 24px 60px rgba(0,0,0,.08);
+  --serif:"Instrument Serif", Georgia, "Times New Roman", serif;
+  --sans:"Inter", "Helvetica Neue", Arial, sans-serif;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#121212; --surface:#1c1c1e; --ink:#f2f1ed; --muted:#9a9893; --line:#2e2e30;
+    --soft:#2a2a2c; --soft2:#333336; --vis-a:#232325; --vis-b:#2c2c2f; --dark:#0c0c0d;
+    --shadow:0 24px 60px rgba(0,0,0,.4); color-scheme: dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#121212; --surface:#1c1c1e; --ink:#f2f1ed; --muted:#9a9893; --line:#2e2e30;
+  --soft:#2a2a2c; --soft2:#333336; --vis-a:#232325; --vis-b:#2c2c2f; --dark:#0c0c0d;
+  --shadow:0 24px 60px rgba(0,0,0,.4); color-scheme: dark;
+}
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:inherit;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{max-width:100%}
+
+/* intro + outro */
+.intro,.outro{min-height:90vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px 24px}
+.intro h1{font-family:var(--serif);font-weight:400;font-size:clamp(48px,8vw,112px);line-height:.95;letter-spacing:-.03em}
+.intro h1 em,.sw-head h2 em,.outro h2 em{font-style:italic}
+.intro p{margin-top:22px;color:var(--muted);font-size:17px;line-height:1.6;max-width:520px}
+.hint{margin-top:44px;display:inline-flex;align-items:center;gap:10px;font-size:14px;color:var(--ink);background:var(--surface);border:1px solid var(--line);padding:10px 18px;border-radius:999px}
+.hint span{display:inline-block;animation:bob 1.6s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(4px)}}
+.outro h2{font-family:var(--serif);font-weight:400;font-size:clamp(44px,6vw,88px);letter-spacing:-.03em;line-height:1}
+.outro p{margin-top:18px;color:var(--muted);font-size:16px}
+
+/* stage */
+.sw{position:relative}
+.sw-stage{height:100vh;height:100dvh;display:flex;flex-direction:column;justify-content:center;gap:clamp(24px,4vh,44px);overflow:hidden}
+.sw-top{display:flex;justify-content:space-between;align-items:flex-end;gap:32px;padding:0 clamp(24px,6vw,110px)}
+.sw-head h2{font-family:var(--serif);font-weight:400;font-size:clamp(52px,6vw,92px);line-height:.95;letter-spacing:-.03em}
+.sw-head p{margin-top:14px;color:var(--muted);font-size:15.5px;line-height:1.6;max-width:380px}
+.sw-meter{min-width:260px;text-align:right}
+.counter{display:inline-flex;align-items:baseline;gap:10px;font-family:var(--serif)}
+.counter .now{font-size:72px;line-height:1;height:72px;overflow:hidden;display:inline-block}
+.counter .now-track{display:flex;flex-direction:column}
+.counter .now-track b{font-weight:400;height:72px;display:block}
+.counter .tot{font-size:26px;color:var(--muted)}
+.titles{height:40px;overflow:hidden;margin-top:6px}
+.titles-track{display:flex;flex-direction:column}
+.titles-track div{height:40px;font-family:var(--serif);font-size:30px;line-height:40px;letter-spacing:-.02em;white-space:nowrap}
+.titles-track div em{font-style:italic}
+.progress{height:2px;background:var(--line);margin-top:16px;border-radius:2px;overflow:hidden}
+.progress i{display:block;height:100%;background:var(--ink);transform:scaleX(0);transform-origin:left}
+
+.track{display:flex;gap:28px;padding:0 clamp(24px,6vw,110px);width:max-content;will-change:transform}
+.card{position:relative;flex:0 0 auto;width:clamp(400px,36vw,560px);height:min(62vh,600px);background:var(--surface);border-radius:30px;box-shadow:var(--shadow);overflow:hidden;display:flex;flex-direction:column}
+.end-card{flex:0 0 auto;width:clamp(260px,22vw,340px);height:min(62vh,600px);border-radius:30px;border:1px dashed var(--line);display:flex;flex-direction:column;justify-content:center;align-items:flex-start;padding:36px;gap:14px}
+.end-card h3{font-family:var(--serif);font-weight:400;font-size:40px;line-height:1;letter-spacing:-.02em}
+.end-card h3 em{font-style:italic}
+.end-card p{color:var(--muted);font-size:14.5px;line-height:1.55}
+.vis{position:relative;flex:1 1 55%;min-height:0;background:linear-gradient(160deg,var(--vis-a),var(--vis-b));overflow:hidden}
+.vis .inner{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;will-change:transform}
+.vis .no{position:absolute;left:22px;top:16px;font-family:var(--serif);font-size:26px;z-index:6}
+.info{flex:0 0 auto;padding:22px 28px 26px}
+.meta{display:flex;justify-content:space-between;gap:12px;font-size:12.5px;color:var(--muted)}
+.meta span:last-child{white-space:nowrap}
+.info h3{font-family:var(--serif);font-weight:400;font-size:clamp(28px,2.4vw,38px);line-height:1;letter-spacing:-.02em;margin:9px 0 8px}
+.info h3 em{font-style:italic}
+.info p{font-size:14.5px;line-height:1.5;color:var(--muted)}
+.info ul{margin:10px 0 12px 18px;font-size:13px;line-height:1.55;color:var(--muted)}
+.pills span{display:inline-block;font-size:12.5px;border:1px solid var(--line);border-radius:999px;padding:6px 12px;margin:0 6px 4px 0;color:var(--ink)}
+
+/* mock UI pieces */
+.bw{position:relative;width:78%;max-width:560px;aspect-ratio:16/9.6;background:var(--surface);border-radius:14px;box-shadow:0 26px 50px rgba(0,0,0,.16);overflow:hidden;display:flex;flex-direction:column}
+.bw .bar{height:24px;flex:0 0 24px;background:var(--soft);display:flex;gap:6px;align-items:center;padding:0 12px}
+.bw .bar i{width:8px;height:8px;border-radius:50%;background:var(--soft2)}
+.bw .body{flex:1;display:flex;gap:10px;padding:12px;min-height:0}
+.blk{background:var(--soft);border-radius:7px}
+.blk.d{background:var(--ink)}
+.blk.m{background:var(--soft2)}
+.col{display:flex;flex-direction:column;gap:7px;flex:1;min-width:0}
+.row{display:flex;gap:7px}
+.lab{font-size:10.5px;font-weight:600}
+.lab.s{font-weight:400;color:var(--muted);font-size:9.5px}
+.side{width:24%;border-radius:8px;padding:10px;display:flex;flex-direction:column;gap:7px}
+.side.d{background:var(--ink);color:var(--bg)}
+.side.l{background:var(--soft)}
+.phone{width:30%;max-width:190px;aspect-ratio:9/18.5;background:#111;border-radius:28px;padding:7px;box-shadow:0 26px 50px rgba(0,0,0,.2)}
+.phone .scr{background:var(--surface);border-radius:21px;height:100%;padding:16px 12px;display:flex;flex-direction:column;gap:8px}
+.ring{width:56%;aspect-ratio:1;border-radius:50%;border:10px solid var(--soft);border-top-color:var(--ink);border-right-color:var(--ink);margin:6px auto 4px}
+.glass{position:absolute;z-index:4;border-radius:16px;padding:12px 14px;background:linear-gradient(135deg,rgba(255,255,255,.85),rgba(240,239,235,.6));border:1px solid rgba(255,255,255,.95);box-shadow:0 16px 36px rgba(0,0,0,.15);backdrop-filter:blur(12px);color:#141414;will-change:transform}
+.glass .t{display:flex;align-items:center;gap:9px;font-size:14.5px;font-weight:500}
+.glass .t i{width:26px;height:26px;border-radius:8px;display:inline-flex;align-items:center;justify-content:center;font-style:normal;font-size:12px;color:#fff;font-weight:600}
+.glass small{display:block;font-size:11px;color:#86847f;margin:3px 0 0 35px}
+.dk{background:linear-gradient(160deg,#1c1c1e,#3a3a3c)}
+.dk .no{color:#fff}
+
+/* mobile: same pinned horizontal scroll, compact layout */
+@media (max-width: 899px){
+  .sw-stage{gap:20px}
+  .sw-top{align-items:flex-end;gap:16px}
+  .sw-head h2{font-size:44px}
+  .sw-head p{display:none}
+  .sw-meter{min-width:0}
+  .counter .now{font-size:44px;height:44px}
+  .counter .now-track b{height:44px}
+  .counter .tot{font-size:18px}
+  .titles{display:none}
+  .progress{margin-top:8px;width:110px;margin-left:auto}
+  .track{gap:16px}
+  .card{width:82vw;height:66vh;height:66dvh}
+  .info{padding:18px 20px 20px}
+  .info ul{display:none}
+  .end-card{width:64vw;height:66vh;height:66dvh}
+}
+@media (prefers-reduced-motion: reduce){
+  .hint span{animation:none}
+  .track{width:auto;overflow-x:auto}
+}
+</style>
+</head>
+<body>
+
+<section class="intro">
+  <h1>Fatimatul Ayunda<br><em>Frontend Developer.</em></h1>
+  <p>Demo efek scroll untuk bagian Selected Work: section di-pin, lalu kartu project bergeser ke kanan mengikuti scroll.</p>
+  <div class="hint">Scroll ke bawah <span>↓</span></div>
+</section>
+
+<section class="sw" id="work">
+  <div class="sw-stage">
+    <div class="sw-top">
+      <div class="sw-head">
+        <h2>Selected <em>work.</em></h2>
+        <p>Eight apps across banking, e-learning, employee benefits, gaming, and education.</p>
+      </div>
+      <div class="sw-meter" aria-live="polite">
+        <div class="counter"><span class="now"><span class="now-track" id="nowTrack"></span></span><span class="tot">/ 08</span></div>
+        <div class="titles"><div class="titles-track" id="titleTrack"></div></div>
+        <div class="progress"><i id="bar"></i></div>
+      </div>
+    </div>
+    <div class="track" id="track"></div>
+  </div>
+</section>
+
+<section class="outro">
+  <h2>Experience <em>&amp; education.</em></h2>
+  <p>Section berikutnya muncul setelah kartu ke-8.</p>
+</section>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+const B = (cls, style='') => `<div class="blk ${cls}" style="${style}"></div>`;
+const rows = (n, h=14) => Array.from({length:n},(_,i)=>B(i%2?'':'m',`height:${h}px`)).join('');
+const browser = body => `<div class="bw"><div class="bar"><i></i><i></i><i></i></div><div class="body">${body}</div></div>`;
+const glass = (pos, bg, icon, title, sub, fg='#fff') =>
+  `<div class="glass" style="${pos}"><div class="t"><i style="background:${bg};color:${fg}">${icon}</i>${title}</div><small>${sub}</small></div>`;
+
+const projects = [
+  { short:'WorkBench <em>BRI</em>', title:'WorkBench <em>Bank BRI</em>', org:'PT Adyatma Cendekia Sinergi Abadi', yr:'2021–2024',
+    desc:'An internal application for client management at Bank BRI.',
+    bullets:['Built pages to create, edit, delete, and list Account Planning, Customer Tagging, and Approval Monitoring.','Integrated APIs for all three modules.'],
+    stack:['PHP CodeIgniter','JavaScript'],
+    vis: browser(`<div class="side d"><span class="lab">WorkBench</span><span class="lab s">Account Planning</span><span class="lab s">Customer Tagging</span><span class="lab s">Approval Monitoring</span></div>
+      <div class="col"><div class="row" style="justify-content:space-between;align-items:center"><span class="lab">Account Planning</span>${B('d','width:54px;height:18px;border-radius:99px')}</div>${rows(6)}</div>`),
+    g: glass('right:7%;bottom:9%','#141414','✓','CRUD','List, create, edit, delete') },
+  { short:'Bank <em>Papua</em>', title:'Bank <em>Papua</em>', org:'PT Adyatma Cendekia Sinergi Abadi', yr:'2021–2024',
+    desc:'An internal application to manage the bank’s inventory and supplies.',
+    bullets:['Built list and CRUD pages for Master Items, Storage, and Inventory.','Integrated APIs for inventory management.'],
+    stack:['Next.js'],
+    vis: browser(`<div class="col"><span class="lab">Inventory</span><div class="row">${B('m','flex:1;height:44px')}${B('d','flex:1;height:44px')}${B('m','flex:1;height:44px')}${B('m','flex:1;height:44px')}</div>${rows(5)}</div>`),
+    g: glass('right:7%;bottom:9%','#5b8def','▤','API','Items, storage, stock') },
+  { short:'<em>Ajari</em>', title:'<em>Ajari</em> E-Learning', org:'PT Adyatma Cendekia Sinergi Abadi', yr:'2021–2024',
+    desc:'An e-learning app that supports students’ education.',
+    bullets:['Developed Dashboard, Quiz, and Group List pages with API integration.','Reported and fixed bugs to improve app functionality.'],
+    stack:['Next.js','Golang'],
+    vis: browser(`<div class="col"><span class="lab">Quiz</span><span class="lab s">Question 3 of 10</span>
+      <div class="blk" style="height:6px;border-radius:9px;position:relative"><div class="blk d" style="width:30%;height:6px;border-radius:9px"></div></div>
+      ${B('m','height:44px')}<div class="row">${B('','flex:1;height:26px')}${B('d','flex:1;height:26px')}</div><div class="row">${B('','flex:1;height:26px')}${B('','flex:1;height:26px')}</div></div>`),
+    g: glass('left:7%;bottom:9%','#b8a6ff','✦','Dashboard','Quiz and group list') },
+  { short:'Holivy <em>NWP VM</em>', title:'Holivy <em>NWP VM</em>', org:'PT Adyatma Cendekia Sinergi Abadi', yr:'2021–2024',
+    desc:'A personal growth and employee benefits management app.',
+    bullets:['Developed the Budget feature, including API integration.','Built Register and Forgot Password flows, then ran UAT.'],
+    stack:['React Native'],
+    vis: `<div style="display:flex;gap:6%;width:100%;justify-content:center;align-items:center;height:100%">
+      <div class="phone"><div class="scr"><span class="lab">Budget</span><div class="ring"></div>${B('','height:22px')}${B('','height:22px')}${B('d','height:20px;border-radius:99px')}</div></div>
+      <div class="phone" style="transform:rotate(6deg)"><div class="scr"><span class="lab">Register</span>${B('','height:22px')}${B('','height:22px')}${B('','height:22px')}${B('d','height:20px;border-radius:99px')}<span class="lab s">Forgot password?</span></div></div></div>`,
+    g: glass('left:7%;bottom:12%','#141414','✓','UAT','Features validated') },
+  { short:'Garuda <em>Landing</em>', title:'Garuda Eleven <em>Landing Page</em>', org:'PT Adyatma Cendekia Sinergi Abadi', yr:'2021–2024',
+    desc:'A card game platform where users can buy cards and view ownership.',
+    bullets:['Created sections in the Dashboard page.','Reported and fixed bugs, and ran User Acceptance Testing.'],
+    stack:['Next.js','NestJS'], dark:true,
+    vis: browser(`<div class="col" style="background:#141416;border-radius:8px;align-items:center;justify-content:center;padding:10px">
+      <span class="lab" style="color:#fff;font-size:13px;letter-spacing:.06em">GARUDA ELEVEN</span><span class="lab s" style="color:#999">Collect, own, play</span>
+      <div class="row" style="width:76%;margin-top:6px">${['#2b2b2e','#e9e7e2','#2b2b2e','#e9e7e2'].map(c=>`<div style="flex:1;aspect-ratio:3/4;border-radius:8px;background:${c}"></div>`).join('')}</div></div>`),
+    g: glass('right:7%;bottom:9%','#ffa36b','♦','Dashboard','Sections and UAT') },
+  { short:'Garuda <em>CMS</em>', title:'Garuda Eleven <em>CMS</em>', org:'PT Adyatma Cendekia Sinergi Abadi', yr:'2021–2024',
+    desc:'Content management system for the Garuda Eleven landing page and game.',
+    bullets:['Built the Character Management page with API integration.','Developed the Quest feature and Item Management API, then wrote technical docs.'],
+    stack:['Next.js','NestJS'],
+    vis: browser(`<div class="side l"><span class="lab s">Characters</span><span class="lab s">Quests</span><span class="lab s">Items</span></div>
+      <div class="col"><span class="lab">Character Management</span><div style="display:grid;grid-template-columns:repeat(4,1fr);gap:7px;flex:1">${Array.from({length:8},(_,i)=>B(i===2?'d':'m','')).join('')}</div></div>`),
+    g: glass('left:7%;bottom:9%','#141414','⚙','Quest &amp; Item API','Docs for the team') },
+  { short:'<em>Affitto</em>', title:'<em>Affitto</em>', org:'Dignitas Academy Bootcamp', yr:'2022',
+    desc:'A venue rental app enabling users to book venues by location and category.',
+    bullets:['Designed the database schema and created initial mockups.','Designed UI/UX for core features, built pages and integrated APIs.'],
+    stack:['Next.js','NestJS'],
+    vis: browser(`<div class="col"><span class="lab">Affitto</span><div class="row">${B('','flex:1;height:20px;border-radius:99px')}${B('d','width:28%;height:20px;border-radius:99px')}</div>
+      <div class="row" style="flex:1">${[0,1,2].map(()=>`<div class="col">${B('m','flex:1')}${B('','height:8px;width:70%')}${B('','height:8px;width:45%')}</div>`).join('')}</div></div>`),
+    g: glass('right:7%;bottom:9%','#1c8c5e','⌖','Location','By location and category') },
+  { short:'<em>E-Rapor</em>', title:'E-Rapor <em>Our Achievement</em>', org:'PT Bangun Kreatif Abadi, internship', yr:'2021',
+    desc:'A web platform to summarize and manage student achievements.',
+    bullets:['Created and designed the database.','Created mockups and UI/UX, built pages and wired the API.'],
+    stack:['React JS'],
+    vis: browser(`<div class="col"><span class="lab">Our Achievement</span><div class="row">${B('d','flex:1;height:40px')}${B('m','flex:1;height:40px')}${B('m','flex:1;height:40px')}</div>
+      <div class="row" style="flex:1;align-items:flex-end">${[40,62,50,74,58,80,96,70,88,64,76].map((h,i)=>B(i===6?'d':'m',`flex:1;height:${h}%;border-radius:4px`)).join('')}</div></div>`),
+    g: glass('left:7%;bottom:9%','#d18a1c','★','Report','Achievement summary') },
+];
+
+const track = document.getElementById('track');
+const nowTrack = document.getElementById('nowTrack');
+const titleTrack = document.getElementById('titleTrack');
+const bar = document.getElementById('bar');
+
+projects.forEach((p, i) => {
+  const n = String(i+1).padStart(2,'0');
+  track.insertAdjacentHTML('beforeend', `
+    <article class="card">
+      <div class="vis ${p.dark?'dk':''}"><span class="no">${n}</span><div class="inner">${p.vis}</div>${p.g}</div>
+      <div class="info">
+        <div class="meta"><span>${p.org}</span><span>${p.yr}</span></div>
+        <h3>${p.title}</h3>
+        <p>${p.desc}</p>
+        <ul>${p.bullets.map(b=>`<li>${b}</li>`).join('')}</ul>
+        <div class="pills">${p.stack.map(s=>`<span>${s}</span>`).join('')}</div>
+      </div>
+    </article>`);
+  nowTrack.insertAdjacentHTML('beforeend', `<b>${n}</b>`);
+  titleTrack.insertAdjacentHTML('beforeend', `<div>${p.short}</div>`);
+});
+track.insertAdjacentHTML('beforeend', `<div class="end-card"><h3>That’s <em>all eight.</em></h3><p>Keep scrolling to see my experience and education.</p></div>`);
+
+gsap.registerPlugin(ScrollTrigger);
+ScrollTrigger.config({ ignoreMobileResize: true });
+const cards = gsap.utils.toArray('.card');
+const total = cards.length;
+const mm = gsap.matchMedia();
+
+mm.add('(prefers-reduced-motion: no-preference)', () => {
+  const distance = () => track.scrollWidth - window.innerWidth;
+  let current = -1;
+
+  const setActive = idx => {
+    if (idx === current) return;
+    current = idx;
+    gsap.to([nowTrack, titleTrack], { yPercent: -(100 / total) * idx, duration: 0.5, ease: 'power3.out', overwrite: true });
+  };
+
+  // vertical scroll drives the track to the left, so the cards travel to the right
+  const slide = gsap.to(track, {
+    x: () => -distance(),
+    ease: 'none',
+    scrollTrigger: {
+      trigger: '.sw',
+      start: 'top top',
+      end: () => '+=' + distance(),
+      pin: '.sw-stage',
+      anticipatePin: 1,
+      scrub: 1,
+      invalidateOnRefresh: true,
+      onUpdate: self => {
+        gsap.set(bar, { scaleX: self.progress });
+        setActive(Math.min(total - 1, Math.round(self.progress * (total - 0.4))));
+      }
+    }
+  });
+  setActive(0);
+
+  // depth inside each card while it travels across the screen
+  cards.forEach(card => {
+    const st = { trigger: card, containerAnimation: slide, start: 'left right', end: 'right left', scrub: true };
+    gsap.fromTo(card.querySelector('.inner'), { xPercent: 7 }, { xPercent: -7, ease: 'none', scrollTrigger: st });
+    gsap.fromTo(card.querySelector('.glass'), { xPercent: 40 }, { xPercent: -40, ease: 'none', scrollTrigger: { ...st } });
+    gsap.fromTo(card, { scale: 0.9, rotate: 2 }, {
+      scale: 1, rotate: 0, ease: 'power2.out',
+      scrollTrigger: { trigger: card, containerAnimation: slide, start: 'left 105%', end: 'left 55%', scrub: true }
+    });
+  });
+
+  gsap.from('.sw-head > *', {
+    y: 40, opacity: 0, stagger: 0.12, duration: 0.9, ease: 'power3.out',
+    scrollTrigger: { trigger: '.sw', start: 'top 70%' }
+  });
+
+  return () => gsap.set([track, cards, '.inner', '.glass', bar, nowTrack, titleTrack], { clearProps: 'all' });
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+/* mockup: footer (absolute left/right 120px, bottom 44px di dalam .contact) */
+.footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 44px var(--page-x);
+  font-size: 13px;
+  line-height: normal;
+  color: var(--muted);
+}
+.footer a {
+  transition: color 0.2s ease;
+}
+.footer a:hover {
+  color: var(--ink);
+}
+
+@media (max-width: 899px) {
+  .footer {
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 32px var(--page-x) 40px;
+    text-align: center;
+  }
+}

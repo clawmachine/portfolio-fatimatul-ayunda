@@ -1,0 +1,491 @@
+/* =========================================================
+   Hero — nilai disalin dari design/mockup-source/index.html (.hero, .glass, .pane, .ghost, .side, .av, .code)
+   Desktop: panggung 1440×1120 dengan koordinat mockup, diskalakan saat layar < 1440px.
+   Elemen melayang memakai 3 lapis (lihat Float di Hero.tsx):
+   *Pos = posisi/ukuran (layer), kelas kartu = transform CSS dari mockup.
+   ========================================================= */
+
+.hero {
+  /* rasio lebar layar / 1440, maksimal 1 */
+  --s: min(1, tan(atan2(100vw, 1440px)));
+  position: relative;
+  height: calc(1120px * var(--s));
+  overflow: hidden;
+}
+
+.stage {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 1440px;
+  height: 1120px;
+  transform: translateX(-50%) scale(var(--s));
+  transform-origin: top center;
+}
+
+/* ---------- sebelum intro GSAP berjalan ----------
+   Elemen yang dianimasikan disembunyikan sampai JS siap (hindari kedip).
+   Pengaman: kalau JS gagal, animasi CSS menampilkannya lagi setelah 4 detik. */
+@keyframes revealFailsafe {
+  to {
+    visibility: visible;
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .hero[data-intro='pending'] [data-reveal] {
+    visibility: hidden;
+    animation: revealFailsafe 0s 4s forwards;
+  }
+}
+
+/* ---------- teks ---------- */
+.title {
+  position: absolute;
+  top: 150px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 106px;
+  line-height: 0.95;
+  letter-spacing: -0.035em;
+  /* flex: margin negatif .line tidak saling collapse */
+  display: flex;
+  flex-direction: column;
+}
+/* mask untuk animasi baris; padding + margin negatif agar tata letak tetap sama dan huruf tidak terpotong */
+.line {
+  display: block;
+  overflow: hidden;
+  padding: 0.1em 0 0.16em;
+  margin: -0.1em 0 -0.16em;
+}
+.line > span {
+  display: inline-block;
+}
+
+.sub {
+  position: absolute;
+  top: 438px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 18px;
+  line-height: 1.55;
+  color: var(--muted);
+}
+
+.btns {
+  position: absolute;
+  top: 526px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 14px;
+  z-index: 6;
+}
+.btnWrap {
+  display: flex;
+}
+
+/* ---------- visual ---------- */
+.visual {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.ring {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 1440px;
+  height: 1120px;
+  z-index: 1;
+}
+.ring path {
+  fill: none;
+  stroke: var(--deco);
+  stroke-width: 1.2;
+}
+
+/* lapisan elemen melayang */
+.layer {
+  position: absolute;
+}
+.motion {
+  height: 100%;
+}
+
+/* kartu kaca hantu di belakang foto */
+.ghost1Pos,
+.ghost2Pos,
+.ghost3Pos {
+  z-index: 2;
+}
+.ghost1Pos {
+  left: 520px;
+  top: 650px;
+  width: 80px;
+  height: 170px;
+}
+.ghost2Pos {
+  left: 860px;
+  top: 620px;
+  width: 90px;
+  height: 150px;
+}
+.ghost3Pos {
+  left: 950px;
+  top: 670px;
+  width: 70px;
+  height: 150px;
+}
+.ghost {
+  height: 100%;
+  border-radius: 16px;
+  background: var(--ghost);
+  border: 1px solid var(--ghost-line);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+.ghost1 {
+  transform: perspective(600px) rotateY(48deg);
+}
+.ghost2 {
+  transform: perspective(600px) rotateY(-45deg);
+}
+.ghost3 {
+  transform: perspective(600px) rotateY(-55deg);
+  opacity: 0.8;
+}
+
+.photo {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  width: 470px;
+  height: auto;
+  z-index: 3;
+  -webkit-mask-image: linear-gradient(to bottom, #000 80%, transparent 100%),
+    linear-gradient(to right, transparent 0, #000 10%, #000 90%, transparent 100%);
+  -webkit-mask-composite: source-in;
+  mask-image: linear-gradient(to bottom, #000 80%, transparent 100%),
+    linear-gradient(to right, transparent 0, #000 10%, #000 90%, transparent 100%);
+  mask-composite: intersect;
+}
+
+/* kartu kaca */
+.webPos,
+.qaPos,
+.mobilePos,
+.codePos,
+.ballPos {
+  z-index: 5;
+}
+.webPos {
+  left: 380px;
+  top: 730px;
+  width: 225px;
+}
+.web {
+  transform: perspective(700px) rotateY(22deg) rotateZ(-3deg);
+}
+.qaPos {
+  left: 465px;
+  top: 1000px;
+  width: 235px;
+}
+.qa {
+  transform: perspective(700px) rotateY(12deg) rotateZ(-2deg);
+}
+.mobilePos {
+  left: 850px;
+  top: 770px;
+  width: 225px;
+}
+.mobile {
+  transform: perspective(700px) rotateY(-24deg) rotateZ(3deg);
+}
+
+/* panel gelap */
+.pane {
+  height: 100%;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+}
+.codePos {
+  left: 345px;
+  top: 860px;
+  width: 140px;
+  height: 160px;
+}
+.code {
+  transform: perspective(700px) rotateY(35deg);
+  background: #1a1a1c;
+}
+.code pre {
+  font-family: 'Courier New', monospace;
+  font-size: 10.5px;
+  line-height: 1.6;
+  color: #c9ccd3;
+  padding: 14px;
+  white-space: pre;
+}
+.codeLine {
+  display: block;
+}
+.k {
+  color: #fff;
+}
+.s {
+  color: #9a9da5;
+}
+.ballPos {
+  left: 930px;
+  top: 900px;
+  width: 150px;
+  height: 150px;
+}
+.ball {
+  transform: perspective(700px) rotateY(-30deg);
+  background: radial-gradient(circle at 60% 40%, #6b6b6b 0, #2a2a2a 32%, #0f0f0f 33%, #111 100%);
+}
+
+/* kartu samping miring */
+.sideLeftPos,
+.sideRightPos {
+  z-index: 6;
+  width: 235px;
+}
+.sideLeftPos {
+  left: 110px;
+  top: 385px;
+}
+.sideRightPos {
+  left: 1080px;
+  top: 400px;
+}
+.sideEm {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 25px;
+}
+
+/* avatar bulat bertumpuk (mockup: .av) */
+.av {
+  display: flex;
+  align-items: center;
+}
+.av b {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  margin-left: -8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  color: #fff;
+  font-weight: 600;
+}
+.av b:first-child {
+  margin-left: 0;
+}
+.av b.plus {
+  background: #fff;
+  color: #111;
+  border: 1px solid var(--line);
+  font-weight: 400;
+  font-size: 15px;
+}
+
+/* badge melingkar */
+.badge {
+  position: absolute;
+  left: 1210px;
+  top: 180px;
+  width: 130px;
+  height: 130px;
+  z-index: 6;
+  color: var(--ink);
+}
+.badge text {
+  font-family: var(--sans);
+  font-size: 10px;
+  letter-spacing: 2.2px;
+  fill: currentColor;
+}
+.badge > path {
+  fill: currentColor;
+}
+
+/* ---------- pojok bawah ---------- */
+.corners {
+  display: contents;
+}
+.clients {
+  position: absolute;
+  left: 120px;
+  bottom: 120px;
+  z-index: 6;
+}
+.stats {
+  position: absolute;
+  right: 120px;
+  bottom: 130px;
+  z-index: 6;
+  display: flex;
+  align-items: flex-end;
+  gap: 16px;
+}
+.rule {
+  width: 34px;
+  height: 1px;
+  background: #bbb;
+  margin-bottom: 16px;
+}
+.ruleStats {
+  margin-bottom: 24px;
+}
+.note {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.5;
+}
+.clientAv {
+  margin-top: 16px;
+}
+.spark {
+  display: block;
+  /* mockup: margin 22px + celah baseline svg inline = 26px */
+  margin-bottom: 26px;
+  color: var(--ink);
+}
+
+/* =========================================================
+   < 900px: satu kolom. Dekorasi besar (garis, ghost, panel, kartu samping, badge) disembunyikan.
+   ========================================================= */
+@media (max-width: 899px) {
+  .hero {
+    height: auto;
+    padding: 112px 20px 48px;
+  }
+  .stage {
+    position: static;
+    width: auto;
+    height: auto;
+    transform: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .title,
+  .sub,
+  .btns {
+    position: static;
+  }
+  .title {
+    font-size: clamp(46px, 12.5vw, 76px);
+    line-height: 0.98;
+  }
+  .sub {
+    margin-top: 20px;
+    max-width: 520px;
+    font-size: 16px;
+  }
+  .br {
+    display: none;
+  }
+  .btns {
+    margin-top: 26px;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .visual {
+    position: relative;
+    inset: auto;
+    width: 100%;
+    max-width: 420px;
+    height: clamp(440px, 122vw, 520px);
+    margin-top: 24px;
+  }
+  .ring,
+  .badge,
+  .desktopOnly {
+    display: none;
+  }
+  .photo {
+    width: min(310px, 80%);
+  }
+
+  .visual .glassCard {
+    padding: 11px 14px;
+  }
+  .visual .glassCard > div {
+    font-size: 14.5px;
+  }
+  .webPos,
+  .qaPos,
+  .mobilePos {
+    width: auto;
+  }
+  /* kartu di atas kepala dan di bawah dagu supaya wajah tidak tertutup */
+  .webPos {
+    left: 0;
+    top: 0;
+  }
+  .web {
+    transform: perspective(700px) rotateY(14deg) rotateZ(-3deg);
+  }
+  .mobilePos {
+    left: auto;
+    right: 0;
+    top: 58px;
+  }
+  .mobile {
+    transform: perspective(700px) rotateY(-14deg) rotateZ(3deg);
+  }
+  .qaPos {
+    left: 4%;
+    top: auto;
+    bottom: 5%;
+  }
+  .qa {
+    transform: perspective(700px) rotateY(8deg) rotateZ(-2deg);
+  }
+
+  .corners {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    width: 100%;
+    max-width: 420px;
+    margin-top: 32px;
+  }
+  .clients,
+  .stats {
+    position: static;
+  }
+  .stats {
+    justify-content: flex-end;
+    text-align: right;
+  }
+  .ruleStats {
+    display: none;
+  }
+  .spark {
+    margin: 0 0 14px auto;
+  }
+  .note {
+    font-size: 13px;
+  }
+}

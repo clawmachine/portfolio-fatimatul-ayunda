@@ -1,0 +1,310 @@
+/* mockup: .bento, .bx (.w7/.w5/.dark), .stagez, .txt, .b, .tagg, .mini, .ph, .frame, .codechip, .uat */
+.section {
+  position: relative;
+  /* bawah 0: judul Tools & Skills menyusul dengan jarak 130px */
+  padding: 60px var(--page-x) 0;
+}
+
+.bento {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 20px;
+  margin-top: 64px;
+}
+
+/* ---------- kartu ---------- */
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  border-radius: 32px;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  container-type: inline-size; /* 100cqw = lebar kartu, dipakai untuk menskalakan kanvas */
+}
+.w7 {
+  grid-column: span 7;
+  /* lebar kartu pada 1440px = lebar kanvas ilustrasi */
+  --dw: 691.67px;
+}
+.w5 {
+  grid-column: span 5;
+  --dw: 488.33px;
+}
+
+/* area visual atas: 290px pada 1440px, ikut mengecil bersama kanvas */
+.stage {
+  --s: min(1, tan(atan2(100cqw, var(--dw))));
+  position: relative;
+  flex: none;
+  height: calc(290px * var(--s));
+  background: var(--stage);
+  overflow: hidden;
+}
+.canvas {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: var(--dw);
+  height: 290px;
+  transform: scale(var(--s));
+  transform-origin: 0 0;
+}
+
+/* teks bawah: area 150px, teks rata bawah 30px (mockup .txt bottom:30px) */
+.txt {
+  flex: 1 0 150px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 0 34px 30px;
+}
+.txt h3 {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 42px;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+.txt p {
+  margin-top: 10px;
+  max-width: 420px;
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--text-3);
+}
+
+/* kartu gelap (Mobile apps): selalu gelap di mode terang maupun gelap */
+.dark {
+  background: #141414;
+  color: #f4f3ef;
+}
+.dark .stage {
+  background: radial-gradient(120% 90% at 70% 10%, #3a3a3c 0, #1a1a1b 60%);
+}
+.dark .txt p {
+  color: var(--dark-muted);
+}
+
+/* ---------- elemen ilustrasi ---------- */
+.b {
+  position: absolute;
+  display: block;
+  border-radius: 8px;
+  background: var(--soft);
+}
+.ink {
+  background: var(--ink);
+}
+.soft2 {
+  background: var(--soft2);
+}
+.deco {
+  background: var(--deco);
+}
+.pill {
+  border-radius: 999px;
+}
+
+/* label kaca: components/ui/Tag */
+
+/* jendela browser */
+.mini {
+  position: absolute;
+  overflow: hidden;
+  border-radius: 12px;
+  background: var(--surface);
+  box-shadow: 0 22px 44px rgba(0, 0, 0, 0.14);
+}
+.bar {
+  height: 22px;
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  padding: 0 10px;
+  background: var(--bg);
+}
+.bar i {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--deco);
+}
+
+/* HP */
+.phone {
+  position: absolute;
+  padding: 7px;
+  border-radius: 26px;
+  background: #111;
+  box-shadow: 0 24px 44px rgba(0, 0, 0, 0.22);
+}
+.phoneBlack {
+  background: #000;
+}
+.screen {
+  position: relative;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 20px;
+  color: var(--ink);
+  background: var(--surface);
+}
+.screenTitle {
+  position: absolute;
+  left: 12px;
+  top: 20px;
+  font-size: 11px;
+  font-weight: 600;
+}
+.donut {
+  position: absolute;
+  left: 28px;
+  top: 46px;
+  width: 84px;
+  height: 84px;
+  border-radius: 50%;
+  border: 9px solid var(--soft);
+  border-top-color: var(--ink);
+  border-right-color: var(--ink);
+}
+
+/* frame Figma + panah + kode */
+.frame {
+  position: absolute;
+  border: 1.5px solid var(--ink);
+  border-radius: 4px;
+}
+.handle {
+  position: absolute;
+  width: 9px;
+  height: 9px;
+  border-radius: 2px;
+  background: var(--surface);
+  border: 1.5px solid var(--ink);
+}
+.frameLabel {
+  position: absolute;
+  left: 44px;
+  top: 32px;
+  font-size: 11px;
+  color: var(--text-3);
+}
+.arrow {
+  position: absolute;
+  left: 240px;
+  top: 120px;
+}
+.arrow path {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 1.4;
+}
+.codechip {
+  position: absolute;
+  left: 250px;
+  top: 160px;
+  width: 230px;
+  padding: 14px 16px;
+  border-radius: 14px;
+  font-family: 'Courier New', monospace;
+  font-size: 12.5px;
+  line-height: 1.65;
+  white-space: nowrap;
+  color: #d6d8de;
+  background: #18181a;
+  box-shadow: 0 22px 44px rgba(0, 0, 0, 0.25);
+}
+.codechip .k {
+  color: #fff;
+}
+.codechip .c {
+  color: #7d8088;
+}
+
+/* checklist UAT */
+.uat {
+  position: absolute;
+  left: 34px;
+  right: 34px;
+  top: 26px;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  list-style: none;
+}
+.uat li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 11px 14px;
+  border-radius: 14px;
+  font-size: 14px;
+  color: var(--ink);
+  background: var(--row-bg);
+  border: 1px solid var(--tag-line);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+}
+.ck {
+  width: 22px;
+  height: 22px;
+  border-radius: 7px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  color: var(--on-ink);
+  background: var(--ink);
+}
+.project {
+  font-size: 12px;
+  color: var(--muted);
+}
+.status {
+  margin-left: auto;
+  font-size: 12px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  color: var(--ink-3);
+  background: var(--soft);
+}
+
+/* ---------- responsif ---------- */
+@media (max-width: 1240px) {
+  .txt h3 {
+    font-size: 36px;
+  }
+}
+
+@media (max-width: 899px) {
+  .section {
+    padding-top: 40px;
+  }
+  .bento {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
+    margin-top: 44px;
+  }
+  .w7,
+  .w5 {
+    grid-column: auto;
+  }
+  /* kanvas lebih sempit agar ilustrasi kartu lebar tidak terlalu kecil (sisi kanan terpotong) */
+  .web {
+    --dw: 560px;
+  }
+  .qa {
+    --dw: 520px;
+  }
+  .card {
+    border-radius: 28px;
+  }
+  .txt {
+    flex-basis: auto;
+    padding: 22px 24px 26px;
+  }
+  .txt h3 {
+    font-size: 34px;
+  }
+}

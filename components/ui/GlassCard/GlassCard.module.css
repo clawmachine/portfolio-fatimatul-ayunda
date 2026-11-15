@@ -1,0 +1,36 @@
+/* mockup: .glass, .glass .t, .glass .t i, .glass small */
+.glass {
+  border-radius: 18px;
+  background: var(--glass);
+  border: 1px solid var(--glass-line);
+  box-shadow: var(--glass-shadow);
+  backdrop-filter: blur(14px);
+  padding: 16px 18px;
+  color: var(--ink);
+}
+.title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 17px;
+  font-weight: 500;
+}
+.title i {
+  width: 30px;
+  height: 30px;
+  flex: 0 0 30px;
+  border-radius: 9px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-style: normal;
+  font-size: 13px;
+  font-weight: 600;
+}
+.glass small {
+  display: block;
+  font-size: 11.5px;
+  color: var(--muted);
+  margin-top: 4px;
+  padding-left: 40px;
+}

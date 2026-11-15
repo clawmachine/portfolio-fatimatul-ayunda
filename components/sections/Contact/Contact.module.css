@@ -1,0 +1,157 @@
+/* =========================================================
+   Contact — nilai dari design/mockup-source/index.html (section .contact)
+   Desktop: panggung 1440×1080 seperti Hero, diskalakan saat layar < 1440px.
+   Tinggi section 976px: 104px terbawah panggung (area footer mockup) diisi komponen Footer.
+   ========================================================= */
+.contact {
+  --s: min(1, tan(atan2(100vw, 1440px)));
+  position: relative;
+  height: calc(976px * var(--s));
+  overflow: hidden;
+}
+.stage {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 1440px;
+  height: 1080px;
+  transform: translateX(-50%) scale(var(--s));
+  transform-origin: top center;
+}
+
+.ring {
+  position: absolute;
+  inset: 0;
+  width: 1440px;
+  height: 1080px;
+}
+.ring path {
+  fill: none;
+  stroke: var(--deco);
+  stroke-width: 1.2;
+}
+
+.head {
+  position: absolute;
+  top: 130px;
+  left: 0;
+  right: 0;
+  text-align: center;
+}
+.title {
+  /* flex: margin negatif .line tidak saling collapse (pola sama dengan headline Hero) */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 26px;
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 92px;
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+}
+/* mask per baris untuk animasi naik; padding agar huruf menjuntai tidak terpotong */
+.line {
+  display: block;
+  overflow: hidden;
+  padding: 0.1em 0 0.16em;
+  margin: -0.1em 0 -0.16em;
+}
+.line > span {
+  display: inline-block;
+}
+
+.formPos {
+  position: absolute;
+  left: 50%;
+  top: 440px;
+  width: 540px;
+  transform: translateX(-50%);
+  z-index: 3;
+}
+
+.cards {
+  display: contents;
+}
+.cardPos {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  width: var(--w);
+  z-index: 2;
+  display: block;
+}
+
+/* =========================================================
+   < 900px: satu kolom; kartu kontak jadi baris ringkas tanpa kemiringan, garis disembunyikan.
+   ========================================================= */
+@media (max-width: 899px) {
+  .contact {
+    height: auto;
+    padding: 96px var(--page-x) 24px;
+  }
+  .stage {
+    position: static;
+    width: auto;
+    height: auto;
+    transform: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .ring {
+    display: none;
+  }
+  .head {
+    position: static;
+  }
+  .title {
+    font-size: clamp(38px, 10vw, 60px);
+    line-height: 1;
+  }
+  .formPos {
+    position: static;
+    transform: none;
+    width: 100%;
+    max-width: 540px;
+    margin-top: 36px;
+  }
+  .cards {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px;
+    width: 100%;
+    max-width: 540px;
+    margin-top: 20px;
+  }
+  .cardPos {
+    position: static;
+    width: auto;
+    min-width: 0;
+  }
+  .cardMotion,
+  .cardMotion > * {
+    height: 100%;
+  }
+  /* kemiringan kartu (inline dari SideCard) dimatikan di HP; isi jadi baris ringkas: ikon | judul + teks */
+  .cardMotion > * {
+    transform: none !important;
+    display: grid;
+    grid-template-columns: 34px minmax(0, 1fr);
+    column-gap: 14px;
+    align-items: center;
+    padding: 16px 18px;
+    border-radius: 20px;
+    overflow-wrap: anywhere;
+  }
+  .cardMotion > * > :first-child {
+    grid-row: span 2;
+  }
+  .cardMotion h4 {
+    margin: 0;
+    font-size: 16px;
+  }
+  .cardMotion p {
+    margin-top: 2px;
+  }
+}

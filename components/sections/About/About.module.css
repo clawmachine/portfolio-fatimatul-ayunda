@@ -1,0 +1,362 @@
+/* mockup: .sec, .about, .portrait, .lead, .link, .sbento (.sc1–.sc3, .ytl, .gtag, .ptiles, .morb) */
+.section {
+  position: relative;
+  padding: 120px var(--page-x) 140px;
+}
+
+/* ---------- foto + perkenalan ---------- */
+.about {
+  display: grid;
+  /* 520px | 90px | 590px pada lebar 1440 */
+  grid-template-columns: minmax(0, 520fr) minmax(0, 590fr);
+  gap: clamp(40px, 6.25vw, 90px);
+  align-items: center;
+  margin-top: 70px;
+}
+
+.portrait {
+  position: relative;
+  aspect-ratio: 520 / 640;
+  border-radius: 32px;
+  background: var(--portrait);
+  overflow: hidden;
+}
+.photo {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  height: auto;
+}
+.location {
+  position: absolute;
+  left: 24px;
+  bottom: 28px;
+  width: 240px;
+  z-index: 3;
+}
+
+.statement {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(30px, 3.2vw, 46px);
+  line-height: 1.12;
+  letter-spacing: -0.01em;
+}
+.lead {
+  margin-top: 16px;
+  font-size: 18px;
+  line-height: 1.65;
+  color: var(--text-2);
+}
+.statement + .lead {
+  margin-top: 28px;
+}
+.link {
+  display: inline-block;
+  margin-top: 30px;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--ink);
+  border-bottom: 1px solid var(--ink);
+  padding-bottom: 3px;
+}
+
+/* ---------- kartu statistik ---------- */
+.stats {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr 1fr;
+  grid-template-rows: 290px;
+  gap: 20px;
+  margin-top: 40px;
+}
+.card {
+  position: relative;
+  border-radius: 28px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+.big {
+  font-family: var(--serif);
+  font-weight: 400;
+  line-height: 0.85;
+  letter-spacing: -0.03em;
+}
+
+/* 1. kartu gelap tahun (selalu gelap di mode terang maupun gelap) */
+.years {
+  background: var(--dark-card);
+  color: var(--dark-text);
+  padding: 24px 26px;
+}
+.years .big {
+  font-size: 120px;
+  margin-top: 20px;
+}
+.years .big em {
+  font-size: 40px;
+  color: var(--dark-muted);
+  margin-left: 6px;
+  letter-spacing: -0.01em;
+}
+.cap {
+  margin-top: 12px;
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: var(--dark-muted);
+}
+.tag {
+  position: absolute;
+  top: 22px;
+  right: 22px;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 12px;
+  padding: 7px 12px;
+  border-radius: 999px;
+  color: #e8e7e3;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(8px);
+}
+.tag i {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent-green);
+}
+
+.ytl {
+  position: absolute;
+  left: 26px;
+  right: 26px;
+  bottom: 26px;
+}
+.line {
+  position: relative;
+  height: 2px;
+  border-radius: 2px;
+  background: #3a3a3c;
+}
+.fill {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--dark-text);
+}
+.dot {
+  position: absolute;
+  top: -5px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--dark-text);
+  transform: translateX(-50%);
+}
+.dotNext {
+  background: #141415;
+  border: 1.5px dashed #8b8984;
+}
+.labels {
+  position: relative;
+  height: 18px;
+  margin-top: 12px;
+  font-size: 11.5px;
+  color: #8b8984;
+}
+.labels span {
+  position: absolute;
+  transform: translateX(-50%);
+}
+.labels span:first-child {
+  transform: none;
+}
+.labels span:last-child {
+  left: auto !important; /* menimpa left inline: label "next" rata kanan */
+  right: 0;
+  transform: none;
+}
+
+/* 2 & 3. kartu putih */
+.light {
+  background: var(--surface);
+  padding: 26px 28px;
+}
+.light .big {
+  font-size: 96px;
+}
+.label {
+  margin-top: 12px;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 28px;
+  line-height: 1;
+}
+.sm {
+  margin-top: 8px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.card abbr {
+  text-decoration: none;
+  cursor: default;
+}
+
+.tiles {
+  position: absolute;
+  right: 24px;
+  bottom: 24px;
+  display: grid;
+  grid-template-columns: repeat(4, 44px);
+  gap: 7px;
+  list-style: none;
+}
+.tile {
+  width: 44px;
+  height: 44px;
+  border-radius: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--ink);
+  background: var(--tile);
+  border: 1px solid var(--line-2);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.06);
+}
+.tileDark {
+  color: var(--tile-dark-text);
+  background: var(--tile-dark);
+  border-color: var(--tile-dark-line);
+}
+
+.morb {
+  position: absolute;
+  right: 18px;
+  bottom: 14px;
+  width: 200px;
+  height: 140px;
+}
+.morb svg {
+  position: absolute;
+  inset: 0;
+}
+.morb ellipse {
+  fill: none;
+  stroke: var(--deco);
+  stroke-width: 1.2;
+}
+.morb ul {
+  list-style: none;
+}
+.morbCenter {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--serif);
+  font-size: 18px;
+  color: var(--on-ink);
+  background: var(--ink);
+}
+.orb {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  width: 32px;
+  height: 32px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 14px;
+  color: var(--ink);
+  background: var(--tile);
+  border: 1px solid var(--line-2);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
+}
+.orbDark {
+  color: var(--on-ink);
+  background: var(--ink);
+  border-color: var(--ink);
+}
+
+/* ---------- responsif ---------- */
+/* kartu putih terlalu sempit untuk orbit mini → dua kolom, kartu tahun selebar penuh */
+@media (max-width: 1240px) {
+  .stats {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 290px 290px;
+  }
+  .years {
+    grid-column: 1 / -1;
+  }
+  .lead {
+    font-size: 16.5px;
+  }
+}
+
+@media (max-width: 899px) {
+  .section {
+    padding: 80px var(--page-x) 96px;
+  }
+  .about {
+    grid-template-columns: 1fr;
+    gap: 36px;
+    margin-top: 44px;
+  }
+  .portrait {
+    width: 100%;
+    max-width: 440px;
+    margin: 0 auto;
+  }
+  .statement {
+    font-size: clamp(28px, 7.5vw, 38px);
+  }
+  .lead {
+    font-size: 16px;
+  }
+  .location {
+    left: 16px;
+    bottom: 16px;
+    width: 210px;
+  }
+  .stats {
+    grid-template-columns: 1fr;
+    grid-template-rows: none;
+  }
+  .years {
+    min-height: 290px;
+  }
+  /* kartu sempit: kotak project dan orbit mini turun ke bawah teks, tidak menimpa */
+  .tiles {
+    position: static;
+    margin-top: 24px;
+  }
+  .morb {
+    position: relative;
+    right: auto;
+    bottom: auto;
+    margin: 18px auto 0;
+  }
+}
+
+@media (max-width: 360px) {
+  .years .big {
+    font-size: 100px;
+  }
+}

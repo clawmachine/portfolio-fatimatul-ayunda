@@ -1,0 +1,159 @@
+/* Token warna dan font ada di app/globals.css. */
+
+.section {
+  position: relative;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--sans);
+}
+
+/* ---------- stage ---------- */
+.stage {
+  height: 100vh;
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: clamp(24px, 4vh, 44px);
+  overflow: hidden;
+}
+.top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 32px;
+  padding: 0 clamp(24px, 6vw, 110px);
+}
+.head h2 {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(52px, 6vw, 92px);
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+}
+.head em, .names em, .card h3 em, .endCard em { font-style: italic; }
+.head p { margin-top: 14px; color: var(--muted); font-size: 15.5px; line-height: 1.6; max-width: 380px; }
+
+.meter { min-width: 260px; text-align: right; }
+.counter { display: inline-flex; align-items: baseline; gap: 10px; font-family: var(--serif); }
+.num { font-size: 72px; line-height: 1; height: 72px; overflow: hidden; display: inline-block; }
+.numTrack { display: flex; flex-direction: column; }
+.numTrack b { font-weight: 400; height: 72px; display: block; }
+.total { font-size: 26px; color: var(--muted); }
+.names { height: 40px; overflow: hidden; margin-top: 6px; }
+.namesTrack { display: flex; flex-direction: column; }
+.namesTrack div { height: 40px; font-family: var(--serif); font-size: 30px; line-height: 40px; letter-spacing: -0.02em; white-space: nowrap; }
+.progress { height: 2px; background: var(--line); margin-top: 16px; border-radius: 2px; overflow: hidden; }
+.progress i { display: block; height: 100%; background: var(--ink); transform: scaleX(0); transform-origin: left; }
+.srOnly { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* ---------- track + cards ---------- */
+.track { display: flex; gap: 28px; padding: 0 clamp(24px, 6vw, 110px); width: max-content; will-change: transform; }
+.card {
+  position: relative;
+  flex: 0 0 auto;
+  width: clamp(400px, 36vw, 560px);
+  height: min(62vh, 600px);
+  background: var(--surface);
+  border-radius: 30px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.vis { position: relative; flex: 1 1 55%; min-height: 0; background: linear-gradient(160deg, var(--vis-a), var(--vis-b)); overflow: hidden; }
+.visDark { background: linear-gradient(160deg, #1c1c1e, #3a3a3c); }
+.visDark .no { color: #fff; }
+.inner { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; will-change: transform; }
+.no { position: absolute; left: 22px; top: 16px; font-family: var(--serif); font-size: 26px; z-index: 6; }
+
+.badge {
+  position: absolute;
+  bottom: 9%;
+  z-index: 4;
+  border-radius: 16px;
+  padding: 12px 14px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.85), rgba(240, 239, 235, 0.6));
+  border: 1px solid rgba(255, 255, 255, 0.95);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.15);
+  backdrop-filter: blur(12px);
+  color: #141414;
+  will-change: transform;
+}
+.badgeTitle { display: flex; align-items: center; gap: 9px; font-size: 14.5px; font-weight: 500; }
+.badgeTitle i {
+  width: 26px; height: 26px; border-radius: 8px; display: inline-flex; align-items: center; justify-content: center;
+  font-style: normal; font-size: 12px; font-weight: 600;
+}
+.badge small { display: block; font-size: 11px; color: #86847f; margin: 3px 0 0 35px; }
+
+.info { flex: 0 0 auto; padding: 22px 28px 26px; }
+.meta { display: flex; justify-content: space-between; gap: 12px; font-size: 12.5px; color: var(--muted); }
+.meta span:last-child { white-space: nowrap; }
+.card h3 { font-family: var(--serif); font-weight: 400; font-size: clamp(28px, 2.4vw, 38px); line-height: 1; letter-spacing: -0.02em; margin: 9px 0 8px; }
+.info p { font-size: 14.5px; line-height: 1.5; color: var(--muted); }
+.info ul { margin: 10px 0 12px 18px; font-size: 13px; line-height: 1.55; color: var(--muted); }
+.pills span { display: inline-block; font-size: 12.5px; border: 1px solid var(--line); border-radius: 999px; padding: 6px 12px; margin: 0 6px 4px 0; }
+
+.endCard {
+  flex: 0 0 auto;
+  width: clamp(260px, 22vw, 340px);
+  height: min(62vh, 600px);
+  border-radius: 30px;
+  border: 1px dashed var(--line);
+  display: flex; flex-direction: column; justify-content: center; gap: 14px; padding: 36px;
+}
+.endCard h3 { font-family: var(--serif); font-weight: 400; font-size: 40px; line-height: 1; letter-spacing: -0.02em; }
+.endCard p { color: var(--muted); font-size: 14.5px; line-height: 1.55; }
+
+/* ---------- mock UI ---------- */
+.bw {
+  position: relative; width: 78%; max-width: 560px; aspect-ratio: 16 / 9.6;
+  background: var(--surface); border-radius: 14px; box-shadow: 0 26px 50px rgba(0, 0, 0, 0.16);
+  overflow: hidden; display: flex; flex-direction: column;
+}
+.bwBar { height: 24px; flex: 0 0 24px; background: var(--soft); display: flex; gap: 6px; align-items: center; padding: 0 12px; }
+.bwBar i { width: 8px; height: 8px; border-radius: 50%; background: var(--soft2); }
+.bwBody { flex: 1; display: flex; gap: 10px; padding: 12px; min-height: 0; }
+.blk { background: var(--soft); border-radius: 7px; }
+.blkDark { background: var(--ink); }
+.blkMid { background: var(--soft2); }
+.col { display: flex; flex-direction: column; gap: 7px; flex: 1; min-width: 0; }
+.row { display: flex; gap: 7px; }
+.grid4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 7px; flex: 1; }
+.lab { font-size: 10.5px; font-weight: 600; }
+.labSub { font-weight: 400; color: var(--muted); font-size: 9.5px; }
+.side { width: 24%; border-radius: 8px; padding: 10px; display: flex; flex-direction: column; gap: 7px; }
+.sideDark { background: var(--ink); color: var(--bg); }
+.sideDark .labSub { color: var(--muted); }
+.sideLight { background: var(--soft); }
+.gameScreen { background: #141416; border-radius: 8px; align-items: center; justify-content: center; padding: 10px; }
+.gameTitle { color: #fff; font-size: 13px; font-weight: 600; letter-spacing: 0.06em; }
+.phones { display: flex; gap: 6%; width: 100%; height: 100%; justify-content: center; align-items: center; }
+.phone { width: 30%; max-width: 190px; aspect-ratio: 9 / 18.5; background: #111; border-radius: 28px; padding: 7px; box-shadow: 0 26px 50px rgba(0, 0, 0, 0.2); }
+.screen { background: var(--surface); border-radius: 21px; height: 100%; padding: 16px 12px; display: flex; flex-direction: column; gap: 8px; }
+.ring { width: 56%; aspect-ratio: 1; border-radius: 50%; border: 10px solid var(--soft); border-top-color: var(--ink); border-right-color: var(--ink); margin: 6px auto 4px; }
+
+/* ---------- mobile: tetap scroll atas/bawah, kartu bergerak ke samping ---------- */
+@media (max-width: 899px) {
+  .stage { gap: 20px; }
+  .top { align-items: flex-end; gap: 16px; }
+  .head h2 { font-size: 44px; }
+  .head p, .names { display: none; }
+  .meter { min-width: 0; }
+  .num, .numTrack b { font-size: 44px; height: 44px; }
+  .total { font-size: 18px; }
+  .progress { margin-top: 8px; width: 110px; margin-left: auto; }
+  .track { gap: 16px; }
+  .card, .endCard { height: 66vh; height: 66dvh; }
+  .card { width: 82vw; }
+  .endCard { width: 64vw; }
+  .info { padding: 18px 20px 20px; }
+  .info ul { display: none; }
+}
+
+/* ---------- tanpa animasi: geser manual ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .track { width: auto; overflow-x: auto; scroll-snap-type: x mandatory; }
+  .card, .endCard { scroll-snap-align: center; }
+}

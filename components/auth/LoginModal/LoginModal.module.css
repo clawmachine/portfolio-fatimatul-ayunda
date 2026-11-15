@@ -1,0 +1,196 @@
+/* acuan: reference/login-demo.html (.overlay, .modal, form, .field, .err, .submit, .spin, .demo) */
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(20, 20, 20, 0.28);
+  backdrop-filter: blur(6px);
+}
+
+.modal {
+  position: relative;
+  width: min(440px, 100%);
+  max-height: calc(100dvh - 40px);
+  overflow-y: auto;
+  border-radius: 30px;
+  padding: 34px 30px 28px;
+  color: var(--ink);
+  background: var(--glass);
+  border: 1px solid var(--glass-line);
+  box-shadow: var(--glass-shadow);
+  backdrop-filter: blur(14px);
+}
+
+.x {
+  position: absolute;
+  right: 16px;
+  top: 16px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  color: var(--muted);
+}
+.x:hover {
+  background: var(--soft);
+}
+
+.modal h2 {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 44px;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+.lead {
+  margin-top: 10px;
+  font-size: 14.5px;
+  color: var(--muted);
+  line-height: 1.55;
+}
+.reason {
+  margin-top: 14px;
+  font-size: 13.5px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+}
+
+.form {
+  margin-top: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.form label {
+  font-size: 13px;
+  font-weight: 500;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.field {
+  position: relative;
+}
+.field input {
+  width: 100%;
+  padding: 14px 16px;
+  border-radius: 14px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  font-size: 15px;
+}
+.field input:focus {
+  outline: none;
+  border-color: var(--ink);
+  box-shadow: 0 0 0 3px rgba(20, 20, 20, 0.08);
+}
+.eye {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 12.5px;
+  color: var(--muted);
+  padding: 6px 10px;
+  border-radius: 10px;
+}
+
+.err {
+  display: none;
+  font-size: 13.5px;
+  color: var(--danger);
+  background: var(--danger-bg);
+  border-radius: 12px;
+  padding: 10px 12px;
+  line-height: 1.45;
+}
+.err.show {
+  display: block;
+}
+
+.submit {
+  margin-top: 4px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 15px;
+  border-radius: 999px;
+  font-size: 15px;
+  font-weight: 500;
+  background: var(--ink);
+  color: var(--on-ink);
+  transition: transform 0.15s ease, opacity 0.15s ease;
+}
+.submit:active {
+  transform: scale(0.97);
+}
+.submit[disabled] {
+  opacity: 0.7;
+  cursor: progress;
+}
+.spin {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.35);
+  border-top-color: currentColor;
+  animation: spin 0.7s linear infinite;
+  display: none;
+}
+.loading .spin {
+  display: inline-block;
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.demo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 6px;
+  padding: 12px 14px;
+  border-radius: 16px;
+  border: 1px dashed var(--line);
+  font-size: 13px;
+  color: var(--muted);
+}
+.demo code {
+  font-family: var(--sans);
+  color: var(--ink);
+  font-weight: 500;
+}
+.demo button {
+  font-size: 13px;
+  font-weight: 500;
+  padding: 8px 12px;
+  border-radius: 10px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  white-space: nowrap;
+}
+
+@media (max-width: 420px) {
+  .demo {
+    flex-direction: column;
+    align-items: stretch;
+    text-align: center;
+  }
+}

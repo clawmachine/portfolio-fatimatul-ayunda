@@ -1,0 +1,92 @@
+/* mockup: .form, .f, .fbtn */
+.form {
+  padding: 34px;
+  border-radius: 28px;
+  background: var(--row-bg);
+  border: 1px solid var(--tag-line);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.1);
+}
+.row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.field {
+  display: block;
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 15px 16px;
+  border-radius: 14px;
+  font-size: 14.5px;
+  line-height: normal;
+  color: var(--ink);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  appearance: none;
+}
+.field::placeholder {
+  color: var(--muted);
+  opacity: 1;
+}
+.field:focus {
+  outline: none;
+  border-color: var(--ink);
+  box-shadow: 0 0 0 3px rgba(20, 20, 20, 0.08);
+}
+
+/* select: teks abu selama belum memilih (opsi kosong = tidak valid) */
+.select {
+  position: relative;
+  display: block;
+}
+.select .field {
+  padding-right: 40px;
+  cursor: pointer;
+}
+.select .field:invalid {
+  color: var(--muted);
+}
+.chevron {
+  position: absolute;
+  right: 16px;
+  top: 13px;
+  font-size: 14.5px;
+  color: var(--muted);
+  pointer-events: none;
+}
+
+.message {
+  height: 110px;
+  resize: none;
+}
+
+.submit {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  margin-top: 8px;
+  padding: 15px;
+  border-radius: 999px;
+  font-size: 15px;
+  color: var(--on-ink);
+  background: var(--ink);
+}
+/* efek tekan di label: transform tombol dipakai GSAP untuk efek magnetic */
+.submit > span {
+  display: inline-block;
+  transition: transform 0.15s ease;
+}
+.submit:active > span {
+  transform: scale(0.96);
+}
+
+.note {
+  font-size: 13px;
+  text-align: center;
+  color: var(--muted);
+}
+.note:not(:empty) {
+  margin-top: 12px;
+}
